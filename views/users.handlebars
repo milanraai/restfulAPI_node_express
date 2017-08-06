@@ -1,0 +1,58 @@
+<div class="page-headers"> 
+  <h1> {{ title }}  </h1>
+  
+  <div class="userList {{hide}}">
+
+    <ul style="list-style-type:none">
+      {{# each list }} 
+      <li><a href="/users/{{this._id}}"> {{ this.first_name}} {{ this.last_name}} </a> </li> 
+      {{/ each}}
+    </ul>
+
+  </div>
+
+  <h2> {{ dbFail}} </h2>
+  
+  <div class="singleUser container  {{show}} {{ visible}} ">
+    <form action="/users/delete?form=users" method="POST">
+       <div class="hidden" name="id"> ID : {{ data._id }}</div>
+       <div> Name : {{ data.first_name}} {{ data.last_name}} </div>
+       <div> Email : {{data.email}} </div>
+       <div> Gender : {{ data.gender }} </div>
+       <div> IP Address : {{ data.address }} </div>
+       <div class="container"> 
+          <button class="btn btn-default" id="edit">
+            <a href="./{{data._id}}/edit"> Edit </a> 
+          </button>
+          <button class="btn btn-default" id="delete">
+            <a href="/delete"> Delete </a> 
+          </button>
+      </div>
+  </form>
+</div>
+  
+  <div class="container {{show}} {{hide}}">
+    <form method="POST" action="/users/addNew?form=users">
+     <div class="form-group">
+     </div>
+     <div class="form-group">
+      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="address" name="address" placeholder="Address" {{!-- value="187.148.123.18{{ lastIP }}" --}}>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+
+</div>
+

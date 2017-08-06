@@ -1,0 +1,38 @@
+// without promise 
+router.get('/', function(req, res){
+
+	MongoClient.connect(url, function(err,db){
+		if(err){
+			console.log("unable to connect");
+		} else {
+
+			console.log("connection established");
+			var collection = db.collection('sampleCustomers');
+
+			collection.find({}).toArray(function(err, docs){
+				assert.equal(err, null);
+				console.log("found the following records");
+				console.log(docs.length);
+
+				db.close();
+				res.render('users', { title : "User List", list : docs, hide : "", show : "hidden"});
+			})
+		}
+	})
+
+})
+
+var getDbConnection = function(dbName){
+
+	MongoClient.connect(url, function(err, db){
+
+		if(err){
+			console.log("unable to connect to database");
+			renderFail();
+		} else {
+				console.log("connection established")
+				var collection = db.collection(dbName);
+				return collection;
+		}
+	})
+}

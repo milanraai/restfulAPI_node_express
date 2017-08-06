@@ -1,0 +1,28 @@
+<div class="page-headers"> 
+<h1> {{ title }} </h1>
+
+        <div class="container" >
+        <form method="POST" action="/users/update/{{user._id}}?form=editUser">
+             <div class="form-group">
+            <input type="number" class="form-control" id="auto_Id" name="id" value="{{user._id}}" disabled>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}">
+          </div>
+           <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+          </div>
+           <div class="form-group">
+            <input type="text" class="form-control" id="gender" name="gender" value="{{user.gender}}">
+          </div>
+            <div class="form-group">
+            <input type="text" class="form-control" id="ip_add" name="add" value="{{user.address}}">
+          </div>
+          <button type="submit" class="btn btn-default">Update</button>
+        </form>
+     </div>
+    
+</div>

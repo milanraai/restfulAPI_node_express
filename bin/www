@@ -1,0 +1,44 @@
+var express = require('express');
+var app = express();
+var data = require('../public/javascripts/data.js');
+var userMethods = require('../public/javascripts/users');
+var bodyParser = require('body-parser');
+var handlebars = require('express-handlebars').create({defaultLayout : 'main'});
+var morgan = require("morgan");
+var mongodb = require('mongodb');
+
+var userRoute = require('../routes/users');
+var indexRoute = require('../routes/index');
+
+app.use(express.static(__dirname + 'bin'));
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(morgan("tiny"));
+app.disable('x-powered-by');
+
+app.engine('handlebars',handlebars.engine);
+app.set('view engine', 'handlebars')
+
+app.use(indexRoute);
+app.use('/users', userRoute);
+
+
+// error handling
+app.use(function(req, res){
+  //res.type('text/html');
+  //res.status(500);
+
+  res.render('404')
+})
+
+
+
+// Server info
+
+app.set('port', process.env.PORT || 3000);
+
+
+// server
+app.listen(app.set('port'), function() {
+
+  console.log(`Express started on port ${app.set('port')}. Ctrl-c to terminate` );
+});
