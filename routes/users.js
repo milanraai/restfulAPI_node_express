@@ -264,11 +264,11 @@ router.get('/:id/edit', function( req, res){
 })
 
 
-router.post('/delete', function( req, res){ 
+router.post('/delete/:id', function( req, res){ 
+	var id = req.params.id;
 
-	var id = req.body.id;
-
-	console.log(id);
+var idParam = req.params.idParam;
+	console.log(objectId(idParam));
 
 	MongoClient.connect(url, function(err, db){
 
@@ -279,12 +279,13 @@ router.post('/delete', function( req, res){
 			db.collection("sampleCustomers").deleteOne({"_id" : objectId(id)}, function(err, result){
 
 				assert.equal(null, err);
+
 				console.log("DELETED one record");
 
 				console.log("now closing DELETE connection")
 				db.close();
 
-				res.redirect('/users/');
+				res.redirect('/users');
 
 			})
 	})

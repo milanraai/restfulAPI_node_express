@@ -14,7 +14,6 @@
   <h2> {{ dbFail}} </h2>
   
   <div class="singleUser container  {{show}} {{ visible}} ">
-    <form action="/users/delete?form=users" method="POST">
        <div class="hidden" name="id"> ID : {{ data._id }}</div>
        <div> Name : {{ data.first_name}} {{ data.last_name}} </div>
        <div> Email : {{data.email}} </div>
@@ -24,8 +23,15 @@
           <button class="btn btn-default" id="edit">
             <a href="./{{data._id}}/edit"> Edit </a> 
           </button>
+      </div>
+  </form>
+</div>
+
+<div class="singleUser container  {{show}} {{ visible}} ">
+    <form method="POST" action="/users/delete/{{data._id}}?form=users" >
+       <div class="hidden" name="idParam"> ID : {{ data._id }}</div>
           <button class="btn btn-default" id="delete">
-            <a href="/delete"> Delete </a> 
+            Delete
           </button>
       </div>
   </form>
